@@ -6,7 +6,10 @@
         - ejs express -ejs-layouts
     - Dev dependencies
         - nodemon
-[.] Create Express server - Create a server.js file
+[+] Create Express server - Create a server.js file
+[+] Git Setup and first Commit
+[.] Install Laravel Mix
+    - setup js and scss
 [.] Create Home Page using html and css
     - include tailwind css
 [.] Create Cart Page
@@ -21,6 +24,9 @@
     - dependencies express-flash express-session cookie-parse dotenv
     - status code article
     - Database connection, dependancies mongoose
+[.] Build Login using Passport
+    - Install dependancies passport passport-local express-session
+[.] Create menu model and put dummy Data
 
 
 
