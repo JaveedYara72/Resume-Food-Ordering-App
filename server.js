@@ -11,6 +11,9 @@ const expressLayout = require('express-ejs-layouts')
 
 const PORT = process.env.PORT || 3000 // process.env is a variable that is outside of this project, it will find a suitable address
 
+//Assets
+app.use(express.static('public')) // .static is a middle ware
+
 app.get('/',(req,res)=>{
     // res.send("Hello from server") -> this will be used when there is no rendering involved
     res.render('home')
