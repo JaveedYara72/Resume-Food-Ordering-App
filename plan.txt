@@ -1,0 +1,27 @@
+[+] Create a Directory Structure
+[+] Create a NPM project and install all dependencies
+    - dependencies
+        - express
+        - ejs
+        - ejs express -ejs-layouts
+    - Dev dependencies
+        - nodemon
+[.] Create Express server - Create a server.js file
+[.] Create Home Page using html and css
+    - include tailwind css
+[.] Create Cart Page
+    - order summary section
+    - empty cart section
+[.] Create Order controller and link it in server.js
+[.] Create Orders view with table for customer and admin
+[.] Create Orders single page with status
+[.] Create login page with route
+[.] Create register page with route
+[.] Build register crud
+    - dependencies express-flash express-session cookie-parse dotenv
+    - status code article
+    - Database connection, dependancies mongoose
+
+
+
+--> We are using a MVC Architecture here. MVC - Models,Views,Controllers
