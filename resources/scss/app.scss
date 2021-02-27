@@ -1,5 +1,40 @@
-$primary : red;
+@import './variables';
 
 body{
-    background: $primary;
+    font-family: 'Lato',sans-serif;
+    // font smoothing
+    // -webkit-font-smoothing: antialiased;
+    color: $dark;
+}
+
+nav li:last-child a {
+    background-color: $primary;
+    &:hover{
+        color:#b23301;
+    }
+}
+
+nav li a{
+    transition: $smooth;
+    &:hover{
+        color:$primary;
+    }
+}
+
+section.hero{
+    background-color: $secondary;
+}
+
+.size{
+    background-color: $secondary;
+}
+
+.add-to-cart{
+    border: 2px solid $primary;
+    color: $primary;
+    &:hover{
+        background: $primary;
+        border-color: $pure;
+        color: $pure;
+    }
 }
