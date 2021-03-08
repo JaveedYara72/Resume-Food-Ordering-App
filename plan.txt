@@ -10,11 +10,22 @@
 [+] Git Setup and first Commit
 [+] Install Laravel Mix
     - setup js and scss
-[.] Create Home Page using html and css
+[+] Create Home Page using html and css
     - include tailwind css
-[.] Create Cart Page
+[+] Create Cart Page
     - order summary section
     - empty cart section
+[+] Move routes to routes files
+[+] Create Dedicated Controllers
+[.] Add to Cart functionality
+    - [+] Fetch all Pizzas from db and show on home page
+    - [+] Create menu model and put dummy Data
+        - connect to mongodb
+        - use connect-mongo for session store
+            - dependancies
+                - mongoose, express-session,coneect-mongo, dotenv
+    - axios to send ajax request
+    - install notification library npm i noty
 [.] Create Order controller and link it in server.js
 [.] Create Orders view with table for customer and admin
 [.] Create Orders single page with status
