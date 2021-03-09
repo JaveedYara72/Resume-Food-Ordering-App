@@ -13,6 +13,12 @@ const PORT = process.env.PORT || 3000 // process.env is a variable that is outsi
 const mongoose = require('mongoose')
 // Session
 const session = require('express-session')
+// for cookies
+const flash = require('express-flash')
+// for storing sessions
+const MongoDbStore = require('connect-mongo')(session)
+
+
 
 
 // Database connection - this is a snippet, copy and paste it
@@ -28,13 +34,17 @@ connection.once('open',()=>{
 });
 
 
+
+
 // Session config - this will work as a middleware
 app.use(session({ //passing an object here, encrypt the cookies. cookies and session go hand in hand
     secret: process.env.COOKIE_SECRET,
     resave: false,
+    // store: mongoStore,
     saveUninitialized:false,
     cookie: {maxAge:1000 * 60 * 60 * 24} // this is the lifetime of the cookie, here it is 24 hours
 }))
+app.use(flash()) // this also a middleware, this sets a cookie if it doesn't exist.
 
 
 //Assets
@@ -42,7 +52,7 @@ app.use(express.static('public')) // .static is a middle ware, 'public' is also 
 
 
 // Time to set the template engine
-app.use(expressLayout)
+app.use(expressLayout) //layouts are what we use for dynamic content keeping the headers constant, rendering everything else. we have to do something else.
 app.set('views',path.join(__dirname, '/resources/views'))
 app.set('view engine','ejs')
 
