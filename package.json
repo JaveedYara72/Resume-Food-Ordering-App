@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "connect-mongo": "^4.3.1",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
@@ -21,7 +22,8 @@
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.1",
-    "mongoose": "^5.11.19"
+    "mongoose": "^5.11.19",
+    "noty": "^3.2.0-beta-deprecated"
   },
   "devDependencies": {
     "laravel-mix": "6.0",

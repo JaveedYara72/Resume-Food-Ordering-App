@@ -10,9 +10,11 @@ function initRoutes(app){ // the parameter is in the function is automatically r
     //     // res.send("Hello from server") -> this will be used when there is no rendering involved
     //     res.render('home')
     // })
-    app.get('/cart',cartController().index )
     app.get('/login',authController().login)
     app.get('/register',authController().register)
+
+    app.get('/cart',cartController().index)
+    app.post('/update-cart', cartController().update)
 }
 
 module.exports = initRoutes

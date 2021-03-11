@@ -16,14 +16,14 @@ const session = require('express-session')
 // for cookies
 const flash = require('express-flash')
 // for storing sessions
-const MongoDbStore = require('connect-mongo')(session)
+const MongoDbStore = require('connect-mongo').default;
 
 
 
 
 // Database connection - this is a snippet, copy and paste it
 const url = 'mongodb://localhost/pizza';
-mongoose.connect(url, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true, useFindAndModify:true
 });
 const connection = mongoose.connection;
@@ -40,8 +40,8 @@ connection.once('open',()=>{
 app.use(session({ //passing an object here, encrypt the cookies. cookies and session go hand in hand
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    // store: mongoStore,
     saveUninitialized:false,
+    store: MongoDbStore.create({mongoUrl:process.env.MONGO_URL}),
     cookie: {maxAge:1000 * 60 * 60 * 24} // this is the lifetime of the cookie, here it is 24 hours
 }))
 app.use(flash()) // this also a middleware, this sets a cookie if it doesn't exist.
@@ -49,12 +49,21 @@ app.use(flash()) // this also a middleware, this sets a cookie if it doesn't exi
 
 //Assets
 app.use(express.static('public')) // .static is a middle ware, 'public' is also the folder
+// for reading the json files in express
+app.use(express.json())
 
+
+//Global Middleware
+app.use((req,res, next)=>{
+    res.locals.session = req.session
+    next() // calling next is important
+})
 
 // Time to set the template engine
 app.use(expressLayout) //layouts are what we use for dynamic content keeping the headers constant, rendering everything else. we have to do something else.
 app.set('views',path.join(__dirname, '/resources/views'))
 app.set('view engine','ejs')
+
 
 //routes -> go to web.js for further details
 require('./routes/web')(app) // in web.js, wo waha pe function tha isiliye, hum yaha pe usko send kiya, fir execute hone keliye () symbol diya hai
