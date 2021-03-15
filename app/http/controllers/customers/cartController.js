@@ -1,6 +1,8 @@
 function cartController(){
     return{
         index(req,res){
+            // frontend pe session is already available
+            
             res.render('customers/cart')
         },
         update(req,res){
