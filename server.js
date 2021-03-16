@@ -19,8 +19,6 @@ const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo').default;
 
 
-
-
 // Database connection - this is a snippet, copy and paste it
 const url = 'mongodb://localhost/pizza';
 mongoose.connect(process.env.MONGO_URL, {

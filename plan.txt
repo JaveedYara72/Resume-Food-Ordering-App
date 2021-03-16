@@ -17,7 +17,7 @@
     - empty cart section
 [+] Move routes to routes files
 [+] Create Dedicated Controllers
-[.] Add to Cart functionality
+[+] Add to Cart functionality
     - [+] Fetch all Pizzas from db and show on home page
     - [+] Create menu model and put dummy Data
         - connect to mongodb
@@ -26,17 +26,18 @@
                 - mongoose, express-session,coneect-mongo, dotenv
     - axios to send ajax request
     - install notification library npm i noty
-[.] Create Order controller and link it in server.js
-[.] Create Orders view with table for customer and admin
-[.] Create Orders single page with status
-[.] Create login page with route
-[.] Create register page with route
 [.] Build register crud
     - dependencies express-flash express-session cookie-parse dotenv
     - status code article
     - Database connection, dependancies mongoose
 [.] Build Login using Passport
     - Install dependancies passport passport-local express-session
+
+[.] Create Order controller and link it in server.js
+[.] Create Orders view with table for customer and admin
+[.] Create Orders single page with status
+[.] Create login page with route
+[.] Create register page with route
 [.] Create menu model and put dummy Data
 
 
