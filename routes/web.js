@@ -12,6 +12,7 @@ function initRoutes(app){ // the parameter is in the function is automatically r
     // })
     app.get('/login',authController().login)
     app.get('/register',authController().register)
+    app.post('/register',authController().postRegister) // 2 functions cannot have the same function name
 
     app.get('/cart',cartController().index)
     app.post('/update-cart', cartController().update)

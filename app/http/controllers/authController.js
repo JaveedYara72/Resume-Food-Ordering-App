@@ -10,9 +10,11 @@ function authController(){
             res.render('auth/register')
         },
 
-        cart(req,res){
-            res.render('customers/cart')
-        }
+        postRegister(req,res){
+            const { name, email, password } = req.body // body object se hum variables ko lene vale hai
+            // this is also called object destructuring
+            console.log(req.body)
+        },
     }
 }
 

@@ -47,6 +47,7 @@ app.use(flash()) // this also a middleware, this sets a cookie if it doesn't exi
 
 //Assets
 app.use(express.static('public')) // .static is a middle ware, 'public' is also the folder
+app.use(express.urlencoded({extended: false})) // this is for the re body that we receive from the form
 // for reading the json files in express
 app.use(express.json())
 
