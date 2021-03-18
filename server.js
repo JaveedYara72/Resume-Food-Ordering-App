@@ -17,6 +17,8 @@ const session = require('express-session')
 const flash = require('express-flash')
 // for storing sessions
 const MongoDbStore = require('connect-mongo').default;
+// for logging in
+const passport = require('passport')
 
 
 // Database connection - this is a snippet, copy and paste it
@@ -31,7 +33,11 @@ connection.once('open',()=>{
     console.log('Connection Failed .. ');
 });
 
-
+// passport config
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 // Session config - this will work as a middleware
