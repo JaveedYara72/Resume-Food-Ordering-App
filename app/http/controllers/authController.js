@@ -80,10 +80,11 @@ function authController(){
                 return res.redirect('/register')
             })
 
-
-            console.log(req.body)
-
             // store the user data, make a table about users. 
+        },
+        logout(req,res){
+            req.logout()
+            return res.redirect('/')
         },
     }
 }

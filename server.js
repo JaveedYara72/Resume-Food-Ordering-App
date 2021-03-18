@@ -33,11 +33,6 @@ connection.once('open',()=>{
     console.log('Connection Failed .. ');
 });
 
-// passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
-app.use(passport.initialize())
-app.use(passport.session())
 
 
 // Session config - this will work as a middleware
@@ -51,6 +46,13 @@ app.use(session({ //passing an object here, encrypt the cookies. cookies and ses
 app.use(flash()) // this also a middleware, this sets a cookie if it doesn't exist.
 
 
+// passport config -- ! Always session ke baad passport ayega !
+const passportInit = require('./app/config/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 //Assets
 app.use(express.static('public')) // .static is a middle ware, 'public' is also the folder
 app.use(express.urlencoded({extended: false})) // this is for the re body that we receive from the form
@@ -61,6 +63,7 @@ app.use(express.json())
 //Global Middleware
 app.use((req,res, next)=>{
     res.locals.session = req.session
+    res.locals.user = req.user
     next() // calling next is important
 })
 
