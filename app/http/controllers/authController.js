@@ -27,6 +27,7 @@ function authController(){
                         req.flash('error',info.message)
                         return next(err)
                     }
+                    // if the login is successful
 
                     return res.redirect('/')
                 })
@@ -50,7 +51,7 @@ function authController(){
 
             }
             // if everything is ok, email unique hona chahiye
-            //check if email exists
+            //check if email  already  exists
             User.exists({email: email},(err,result)=>{ //isme the first email is the email attribute present in the database, the other one is object which we get from frontend
                 if(result){ //matlab email hai
                     req.flash('error', 'User with this Email already exists! ')  //flash has 2 argument fields, the first one is which type we want to send and it is also the key, the other is the message
