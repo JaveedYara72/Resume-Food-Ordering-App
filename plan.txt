@@ -26,19 +26,24 @@
                 - mongoose, express-session,coneect-mongo, dotenv
     - axios to send ajax request
     - install notification library npm i noty
-[.] Build register crud
+[+] Build register crud
     - dependencies express-flash express-session cookie-parse dotenv
     - status code article
     - Database connection, dependancies mongoose
-[.] Build Login using Passport
+[+] Build Login using Passport
     - Install dependancies passport passport-local express-session
 
 [.] Create Order controller and link it in server.js
 [.] Create Orders view with table for customer and admin
 [.] Create Orders single page with status
-[.] Create login page with route
-[.] Create register page with route
-[.] Create menu model and put dummy Data
+[.] place order functionality
+[.] show all my orders on custoemr orders page
+[.] order tracker
+    - dependanicies moment
+[.] Socket connection
+    - dependancies socket.io
+[.] BUild project for deployment
+[.] Deploy project on live server
 
 
 

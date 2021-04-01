@@ -10,6 +10,14 @@ function authController(){
         },
 
         postLogin(req,res,next){
+            
+            //validate request
+            const {email, password} = req.body
+            if(!email || !password){
+                req.flash('error', 'All fields are required')  //flash has 2 argument fields, the first one is which type we want to send and it is also the key, the other is the message
+                return res.redirect('/login')
+            }
+            
             passport.authenticate('local', (err,user, info)=>{ // info is the message receiver which we sent in passport, done function mein message bheja tha
                 if(err){
                     req.flash('error', info.message) //message is the key which we had set in the passport
