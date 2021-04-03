@@ -1,4 +1,5 @@
 const Order = require('../../../models/order')
+const moment  = require('moment')
 
 function orderController(){
     return { // we are returning an object
@@ -21,7 +22,8 @@ function orderController(){
 
             order.save().then(result =>{
                 req.flash('success','Order is placed successfully')
-                return res.redirect('/')
+                delete req.session.cart
+                return res.redirect('/customer/orders')
             }) //yaha pe result milega, which is the object we have just made now
             .catch(err=>{
                 req.flash('error','Something went wrong')
@@ -29,12 +31,14 @@ function orderController(){
             })
         },
 async index(req,res){
-            const orders = await Order.find({ customerId: req.user._id  }) // we have customer id and user id in every order
+            const orders = await Order.find({ customerId: req.user._id },
+                null,
+                {sort:{'createdAt': -1}}) // we have customer id and user id in every order, sort context sorts the timeout
             // req.user._id this will give us the logged in user ka pura orders. all of this is related to
              // orders jitne bhi hai, its in array
-             res.render('customers/orders',{
-                 orders: orders
-             })
+            res.render('customers/orders',{
+                orders: orders, moment: moment // sending these variables to the frontend
+            })
         }
     }
 }
