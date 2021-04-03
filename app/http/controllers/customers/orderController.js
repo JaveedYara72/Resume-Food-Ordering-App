@@ -30,12 +30,14 @@ function orderController(){
                 return res.redirect('/cart')
             })
         },
-async index(req,res){
+    async index(req,res){
             const orders = await Order.find({ customerId: req.user._id },
                 null,
                 {sort:{'createdAt': -1}}) // we have customer id and user id in every order, sort context sorts the timeout
             // req.user._id this will give us the logged in user ka pura orders. all of this is related to
-             // orders jitne bhi hai, its in array
+            // orders jitne bhi hai, its in array
+
+            res.header('Cache-Control', 'no-store') // i have no idea why
             res.render('customers/orders',{
                 orders: orders, moment: moment // sending these variables to the frontend
             })

@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 function authController(){
+    const _getRedirectUrl = (req) =>{
+        return req.user.role === 'Admin' ? 'admin/orders ' : '/customer/orders'
+    }
     return{
         login(req,res){
             res.render('auth/login')
@@ -36,8 +39,13 @@ function authController(){
                         return next(err)
                     }
                     // if the login is successful
+                    // return res.redirect('/')
 
-                    return res.redirect('/')
+
+                    // if it is customer then redirect to customer/orders
+                    // if it s admin then redirect to admin/orders
+                    return res.redirect(_getRedirectUrl(req))
+                    
                 })
             })(req,res,next)
         },

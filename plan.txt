@@ -33,11 +33,12 @@
 [+] Build Login using Passport
     - Install dependancies passport passport-local express-session
 
-[.] Create Order controller and link it in server.js
-[.] Create Orders view with table for customer and admin
+[+] Create Order controller and link it in server.js
+[+] Create Orders view with table for customer and admin
+[+] place order functionality
+[+] show all my orders on customer orders and orders page
 [.] Create Orders single page with status
-[.] place order functionality
-[.] show all my orders on custoemr orders page
+
 [.] order tracker
     - dependanicies moment
 [.] Socket connection

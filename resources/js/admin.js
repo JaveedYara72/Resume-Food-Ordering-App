@@ -1,4 +1,9 @@
-function initAdmin(){
+import axios from 'axios'
+import moment from 'moment'
+
+
+
+export function initAdmin(){
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -6,13 +11,13 @@ function initAdmin(){
     axios.get('/admin/orders',{
         headers: {
             "X-Requested-With": "XMLHttpRequest"
-        }.then(res=>{
-            orders = res.data
-            markup  = generateMarkup(orders)
-            orderTableBody.innerHTML  = markup
-        }).catch(err=>{
-            console.log(err)
-        })
+        }
+    }).then(res=>{
+        orders = res.data
+        markup  = generateMarkup(orders)
+        orderTableBody.innerHTML  = markup
+    }).catch(err=>{
+        console.log(err)
     })
 
     function renderItems(items){
@@ -73,4 +78,4 @@ function initAdmin(){
     }
 }
 
-module.exports = initAdmin
+export default initAdmin;
