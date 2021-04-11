@@ -41,6 +41,18 @@ function orderController(){
             res.render('customers/orders',{
                 orders: orders, moment: moment // sending these variables to the frontend
             })
+        },
+        async show(req,res){
+            const order = await Order.findById(req.param.id) // this id should be named as the same as we named in the controller
+            // param because of, param is in the website url
+
+            // Authorize user. authorize karo whether the order is the current logged one or not
+            if(req.user._id.toString() === order.customerId.toString()){
+                // because both of them are objects above
+                return res.render('customer/singleOrder',{order: order})
+            }else{
+                return res.redirect('/')
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
 const AdminOrderController = require('../app/http/controllers/admin/orderController')
 const admin = require('../app/http/middlewares/admin')
+const statusController = require('../app/http/controllers/admin/statusController')
 
 
 function initRoutes(app){ // the parameter is in the function is automatically received
@@ -29,9 +30,12 @@ function initRoutes(app){ // the parameter is in the function is automatically r
     // Customer routes
     app.post('/orders', orderController().store)
     app.get('/customer/orders',auth,orderController().index) // auth is a middleware which protects the logged in users only, if you logout, customers/orders will not be valid anymore. Nice way to protect us. just add a middleware to protect
+    app.get('/customer/orders/:id',auth,orderController().show)
 
     //Admin routes
     app.get('/admin/orders', admin, AdminOrderController().index)
+    app.post('/admin/order/status', admin, statusController().update)
+
     
 }
 
