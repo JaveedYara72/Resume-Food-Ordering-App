@@ -1,9 +1,11 @@
 import axios from 'axios'
 import moment from 'moment'
+import Noty from 'noty'
 
 
 
-export function initAdmin(){
+
+export function initAdmin(socket){
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -76,6 +78,19 @@ export function initAdmin(){
         `
         }).join('') // what this join will do is, it will make an array of html things like above and add them ip
     }
+
+    // socket
+    socket.on('orderPlaced',(order)=>{
+        new Noty({
+            type: 'success',
+            timeout: 1000, //these are in milliseconds
+            text: "New Order",
+            progressBar:false,
+        }).show();
+        orders.unshift(order)
+        orderTableBody.innerHTML = ''
+        orderTableBody.innerHTML = generateMarkup(orders)
+    })
 }
 
 export default initAdmin;

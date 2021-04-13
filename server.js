@@ -19,6 +19,9 @@ const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo').default;
 // for logging in
 const passport = require('passport')
+// Event Emitter
+const Emitter = require('events')
+
 
 
 // Database connection - this is a snippet, copy and paste it
@@ -33,7 +36,10 @@ connection.once('open',()=>{
     console.log('Connection Failed .. ');
 });
 
-
+//Event Emitter
+// Create an Emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter',eventEmitter) // we can use eventEmitter throughout the app now
 
 // Session config - this will work as a middleware
 app.use(session({ //passing an object here, encrypt the cookies. cookies and session go hand in hand
@@ -75,10 +81,33 @@ app.set('view engine','ejs')
 
 //routes -> go to web.js for further details
 require('./routes/web')(app) // in web.js, wo waha pe function tha isiliye, hum yaha pe usko send kiya, fir execute hone keliye () symbol diya hai
+app.use((req,res)=>{
+    res.status(404).render('errors/404.ejs')
+})
 
-
-app.listen(PORT,() => {
+const server = app.listen(PORT,() => {
     console.log(`listening on port ${PORT}`)
+})
+
+// for socket
+const io = require('socket.io')(server)
+io.on('connection',(socket)=>{
+    // make private rooms
+    // jOin the client into our room
+    // every room name is unique
+    console.log(socket.id)
+    socket.on('join',(orderId)=>{
+        console.log(orderId)
+        socket.join(orderId)
+    })
+})
+
+eventEmitter.on('orderUpdated', (data)=>{
+    io.to(`order_${data.id}`).emit('orderUpdated',data)
+})
+
+eventEmitter.on('orderPlaced',(data)=>{
+    io.to('adminRoom').emit('orderPlaced',data)
 })
 
 

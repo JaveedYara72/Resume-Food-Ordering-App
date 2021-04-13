@@ -7,7 +7,7 @@ function orderController(){
                 if(req.xhr){ // if this is a axios call function, then just return the data
                     return res.json(orders)
                 }else{
-                    res.render('admin/orders')
+                    return res.render('admin/orders')
                 }
             }) // ne means an attribute in database. we are trying to show only the active orders on this
         } // Continue, .populate kya karega? populate will get the user from the database. we have customerID with a userId leke we will get the full data of the user using that id. it will fetch it.

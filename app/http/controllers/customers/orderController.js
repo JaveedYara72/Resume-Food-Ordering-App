@@ -21,16 +21,22 @@ function orderController(){
             })
 
             order.save().then(result =>{
-                req.flash('success','Order is placed successfully')
+                Order.populate(result,{ path:'customerId' },(err,placedOrder)=>{
+                    req.flash('success','Order is placed successfully')
                 delete req.session.cart
+                // Emit the event here
+                const eventEmitter = req.app.get('eventEmitter')
+                eventEmitter.emit('orderPlaced', placedOrder)
                 return res.redirect('/customer/orders')
+                })
+                
             }) //yaha pe result milega, which is the object we have just made now
             .catch(err=>{
                 req.flash('error','Something went wrong')
                 return res.redirect('/cart')
             })
         },
-    async index(req,res){
+        async index(req,res){
             const orders = await Order.find({ customerId: req.user._id },
                 null,
                 {sort:{'createdAt': -1}}) // we have customer id and user id in every order, sort context sorts the timeout
@@ -43,13 +49,13 @@ function orderController(){
             })
         },
         async show(req,res){
-            const order = await Order.findById(req.param.id) // this id should be named as the same as we named in the controller
+            const order = await Order.findById(req.params.id) // this id should be named as the same as we named in the controller
             // param because of, param is in the website url
 
             // Authorize user. authorize karo whether the order is the current logged one or not
             if(req.user._id.toString() === order.customerId.toString()){
                 // because both of them are objects above
-                return res.render('customer/singleOrder',{order: order})
+                return res.render('customers/singleOrder',{order: order})
             }else{
                 return res.redirect('/')
             }
